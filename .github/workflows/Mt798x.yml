@@ -90,6 +90,10 @@ env:
   PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+  # 在线 SSH（sshx）会话保持多少分钟。想改就在仓库
+  # Settings -> Secrets and variables -> Actions -> Variables 里加 SSH_TIMEOUT_MIN，
+  # 不设置就是 30 分钟。配置完在网页终端里输入 exit 可以立刻继续编译。
+  TIMEOUT_MIN: ${{ vars.SSH_TIMEOUT_MIN || '30' }}
   TZ: Asia/Shanghai
 
 jobs:

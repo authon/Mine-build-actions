@@ -17,6 +17,7 @@ env:
   PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+  WEIXIN_SCKEY: ${{ secrets.WEIXIN_SCKEY }}
   TZ: Asia/Shanghai
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -174,7 +175,7 @@ jobs:
 
     # 4. 成功通知（使用精确计算的时长）
     - name: 编译成功通知
-      if: success() && steps.compile.outcome == 'success'
+      if: success() && steps.compile.outcome == 'success' && env.WEIXIN_SCKEY != ''
       uses: emon100/Action-Serverchan@v3
       with:
         SCKEY: ${{ secrets.WEIXIN_SCKEY }}
@@ -191,7 +192,7 @@ jobs:
 
     # 5. 失败通知（同样使用精确时长）
     - name: 编译失败通知
-      if: failure() && steps.compile.outcome == 'failure'
+      if: failure() && steps.compile.outcome == 'failure' && env.WEIXIN_SCKEY != ''
       uses: emon100/Action-Serverchan@v3
       with:
         SCKEY: ${{ secrets.WEIXIN_SCKEY }}

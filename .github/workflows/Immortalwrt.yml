@@ -84,6 +84,7 @@ env:
   PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+  WEIXIN_SCKEY: ${{ secrets.WEIXIN_SCKEY }}
   TZ: Asia/Shanghai
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -205,7 +206,7 @@ jobs:
 
     # 新增：编译成功微信通知（基于Serverchan，与Lede格式一致）
     - name: 编译成功触发通知
-      if: success() && steps.compile.outcome == 'success'
+      if: success() && steps.compile.outcome == 'success' && env.WEIXIN_SCKEY != ''
       uses: emon100/Action-Serverchan@v3
       with:
         SCKEY: ${{ secrets.WEIXIN_SCKEY }}
@@ -221,7 +222,7 @@ jobs:
 
     # 新增：编译失败微信通知（带错误详情链接）
     - name: 编译触发失败通知
-      if: failure() && steps.compile.outcome == 'failure'
+      if: failure() && steps.compile.outcome == 'failure' && env.WEIXIN_SCKEY != ''
       uses: emon100/Action-Serverchan@v3
       with:
         SCKEY: ${{ secrets.WEIXIN_SCKEY }}

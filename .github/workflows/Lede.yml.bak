@@ -92,6 +92,7 @@ env:
   PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+  WEIXIN_SCKEY: ${{ secrets.WEIXIN_SCKEY }}
   TZ: Asia/Shanghai
 
 jobs:
@@ -165,7 +166,7 @@ jobs:
         gh_token: ${{ secrets.REPO_TOKEN }}
         
     - name: 触发启动"${{ matrix.target }}"开始编译
-      if: steps.info.outcome == 'success'
+      if: steps.info.outcome == 'success' && env.WEIXIN_SCKEY != ''
       uses: authon/Mine-common@trigger
 
     - name: 触发编译通知

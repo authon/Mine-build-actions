@@ -89,6 +89,7 @@ env:
   PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+  WEIXIN_SCKEY: ${{ secrets.WEIXIN_SCKEY }}
   TZ: Asia/Shanghai
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -209,7 +210,7 @@ jobs:
         echo "FINISH_TIME=$(date +'%Y年%m月%d号%H时%M分')" >> $GITHUB_ENV
         
     - name: 编译成功触发通知
-      if: success() && steps.compile.outcome == 'success'
+      if: success() && steps.compile.outcome == 'success' && env.WEIXIN_SCKEY != ''
       uses: emon100/Action-Serverchan@v3
       with:
         SCKEY: ${{ secrets.WEIXIN_SCKEY }}
@@ -224,7 +225,7 @@ jobs:
           🌴 编译已成功触发 🎈！！！
 
     - name: 编译触发失败通知
-      if: failure() && steps.compile.outcome == 'failure'
+      if: failure() && steps.compile.outcome == 'failure' && env.WEIXIN_SCKEY != ''
       uses: emon100/Action-Serverchan@v3
       with:
         SCKEY: ${{ secrets.WEIXIN_SCKEY }}

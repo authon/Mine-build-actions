@@ -25,7 +25,7 @@
   2025年5月25号
  <br><br>
 
- 1、更换 [清理releases和workflows]  《[新的设置方法在这里](https://github.com/authon/delete-releases-workflows)》
+ 1、更换 [清理releases和workflows]  《[新的设置方法在这里](https://github.com/authon/Mine-delete-releases-workflows)》
 
 
  ---
@@ -232,11 +232,11 @@ CONFIG_TARGET_armsr_armv8_DEVICE_generic=y
 <summary>🔎各种教程</summary>
 <br><br>
 
-《[github actions编译教程](https://github.com/authon/shuoming#%E7%BC%96%E8%AF%91%E6%95%99%E7%A8%8B)》
+《[github actions编译教程](https://github.com/authon/Mine-shuoming#%E7%BC%96%E8%AF%91%E6%95%99%E7%A8%8B)》
 
-《[Amlogic、Rockchip系列固件打包设置教程](https://github.com/authon/shuoming/blob/master/Amlogic.md)》
+《[Amlogic、Rockchip系列固件打包设置教程](https://github.com/authon/Mine-shuoming/blob/master/Amlogic.md)》
 
-《[在线更新固件插件说明](https://github.com/authon/shuoming/blob/master/%E5%AE%9A%E6%97%B6%E6%9B%B4%E6%96%B0%E6%8F%92%E4%BB%B6.md)》
+《[在线更新固件插件说明](https://github.com/authon/Mine-shuoming/blob/master/%E5%AE%9A%E6%97%B6%E6%9B%B4%E6%96%B0%E6%8F%92%E4%BB%B6.md)》
 
 <br/>
 </details>
@@ -247,7 +247,7 @@ CONFIG_TARGET_armsr_armv8_DEVICE_generic=y
 <summary>📳本地编译</summary>
 <br><br>
 
-《[本地Ubuntu一键编译OpenWrt固件](https://github.com/authon/bendi)》
+《[本地Ubuntu一键编译OpenWrt固件](https://github.com/authon/Mine-bendi)》
 
 <br/>
 </details>

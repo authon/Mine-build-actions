@@ -224,7 +224,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - name: 释放Ubuntu磁盘空间
-      uses: authon/free-disk-space@main
+      uses: authon/Mine-free-disk-space@main
       with:
         remove_android: true
         remove_dotnet: true
@@ -239,7 +239,7 @@ jobs:
       uses: actions/checkout@v5
 
     - name: 密匙检测
-      uses: authon/common@yaoshi
+      uses: authon/Mine-common@yaoshi
 
     - name: 整理变量
       run: |
@@ -262,7 +262,7 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        sudo bash -c 'bash <(curl -fsSL https://github.com/authon/common/raw/main/custom/ubuntu.sh)'
+        sudo bash -c 'bash <(curl -fsSL https://github.com/authon/Mine-common/raw/main/custom/ubuntu.sh)'
         sudo timedatectl set-timezone "Asia/Shanghai"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
@@ -296,8 +296,8 @@ jobs:
 
     - name: 自动打包armsr_rootfs_tar_gz
       id: compile
-      uses: authon/common@aarch
+      uses: authon/Mine-common@aarch
 
     - name: 上传,发布
       if: steps.compile.outcome == 'success'
-      uses: authon/common@uploads
+      uses: authon/Mine-common@uploads

@@ -1,0 +1,24 @@
+#!/bin/sh
+# 关闭 pppd 的 ujail 沙箱（本机 PPPoE 拨号必需）
+#
+# 背景：OpenWrt 自 2026-10-31（commit bd4d64e0 / 7be6b668 / fc8ff4d2）起，
+# package/network/services/ppp/files/ppp.sh 会在下面三个条件同时满足时把 pppd
+# 放进 ujail 沙箱：
+#     [ -x /sbin/ujail ] && [ -f /etc/capabilities/pppd.json ] && id -u ppp
+#
+# 实测（x86_64 + PVE/KVM virtio-net + 广东电信 PPPoE）：沙箱内 PPPoE 会话建立失败——
+# PADO 能正常收到，但 PADR 之后一直 "Timeout waiting for PADS packets"，
+# 随后 "Unable to complete PPPoE Discovery phase 2"、pppd 退出码 8，无法上网。
+#
+# 对照实验（同一内核 6.18.55，只有 ppp 包修订号不同）：
+#     10-30 固件  ppp 2.5.4-r2（无 ppp 用户 / 无 capabilities 文件）→ 不启用 jail → 正常
+#     11-05 固件  ppp 2.5.4-r4（有上述文件）                        → 启用 jail   → 失败
+#
+# 移走 capabilities 文件即可让 ppp.sh 跳过 ujail 分支，pppd 恢复以 root 直接运行，
+# 与本机 2026-10-30 及更早固件的运行方式一致，拨号恢复正常。
+#
+# 回滚方法：把本文件删除，并把 /etc/capabilities/pppd.json.bak 改回 pppd.json。
+# 副作用：pppd 失去沙箱加固；dnsmasq 等其它服务的沙箱使用各自文件，不受影响。
+
+rm -f /etc/capabilities/pppd.json
+exit 0
